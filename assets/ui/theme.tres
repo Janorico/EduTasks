@@ -1,0 +1,72 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://cuo1t8mcoy1t5"]
+
+[ext_resource type="Texture2D" uid="uid://yuhy6d2ccx51" path="res://assets/ui/button_square_depth.svg" id="1_6cha6"]
+[ext_resource type="Texture2D" uid="uid://dcymb14hg7vws" path="res://assets/ui/button_square.svg" id="2_ib6tx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lvrds"]
+resource_name = "DialogBG"
+texture = ExtResource("2_ib6tx")
+region_rect = Rect2(14, 14, 36, 36)
+modulate_color = Color(0, 0.2, 0.2, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6cha6"]
+resource_name = "ButtonHover"
+texture = ExtResource("1_6cha6")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+modulate_color = Color(0, 0.6, 0.6, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fenpc"]
+resource_name = "ButtonHoverPressed"
+texture = ExtResource("2_ib6tx")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+modulate_color = Color(0, 0.6, 0.6, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ib6tx"]
+resource_name = "ButtonNormal"
+texture = ExtResource("1_6cha6")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+modulate_color = Color(0, 0.5, 0.5, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_omlnh"]
+resource_name = "ButtonPressed"
+texture = ExtResource("2_ib6tx")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+modulate_color = Color(0, 0.5, 0.5, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_im0sm"]
+resource_name = "DialogBorder"
+texture = ExtResource("2_ib6tx")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+expand_margin_left = 12.0
+expand_margin_top = 36.0
+expand_margin_right = 12.0
+expand_margin_bottom = 12.0
+modulate_color = Color(0, 0.2, 0.2, 1)
+
+[resource]
+AcceptDialog/styles/panel = SubResource("StyleBoxTexture_lvrds")
+Button/styles/hover = SubResource("StyleBoxTexture_6cha6")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_fenpc")
+Button/styles/normal = SubResource("StyleBoxTexture_ib6tx")
+Button/styles/pressed = SubResource("StyleBoxTexture_omlnh")
+MarginContainer/constants/margin_bottom = 4
+MarginContainer/constants/margin_left = 4
+MarginContainer/constants/margin_right = 4
+MarginContainer/constants/margin_top = 4
+Window/styles/embedded_border = SubResource("StyleBoxTexture_im0sm")
+Window/styles/embedded_unfocused_border = SubResource("StyleBoxTexture_im0sm")

@@ -1,0 +1,191 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbqf0qpy686bo"]
+
+[ext_resource type="Script" uid="uid://blq0f6dm64po6" path="res://software/main/main.gd" id="1_oxcdj"]
+[ext_resource type="Material" uid="uid://dv6d3acl2e4jv" path="res://assets/background.tres" id="1_rp4t3"]
+[ext_resource type="Script" uid="uid://kqjmg401p0f3" path="res://software/main/task_view.gd" id="3_fc7eo"]
+[ext_resource type="Texture2D" uid="uid://c4mu3hqk1lrvt" path="res://assets/icons/9054423_bx_arrow_back_icon.svg" id="4_dsh4q"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rp4t3"]
+font_size = 20
+
+[sub_resource type="Animation" id="Animation_dsh4q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Content:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Content:offset_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_fc7eo"]
+resource_name = "notification"
+length = 5.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Content:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Content:offset_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 4.75, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-23.0, 0.0, -0.048421, -23.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dsh4q"]
+_data = {
+&"RESET": SubResource("Animation_dsh4q"),
+&"notification": SubResource("Animation_fc7eo")
+}
+
+[node name="Main" type="ColorRect"]
+material = ExtResource("1_rp4t3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+script = ExtResource("1_oxcdj")
+
+[node name="TaskSelection" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TaskChooser" type="HBoxContainer" parent="TaskSelection"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="TaskSelection/TaskChooser"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "WHAT_DO_YOU_WANT_TO_DO"
+label_settings = SubResource("LabelSettings_rp4t3")
+
+[node name="VSeparator" type="VSeparator" parent="TaskSelection/TaskChooser"]
+layout_mode = 2
+
+[node name="TasksContainer" type="VBoxContainer" parent="TaskSelection/TaskChooser"]
+layout_mode = 2
+
+[node name="Tasks" type="Tree" parent="TaskSelection/TaskChooser/TasksContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+hide_root = true
+scroll_horizontal_enabled = false
+
+[node name="Button" type="Button" parent="TaskSelection/TaskChooser/TasksContainer"]
+layout_mode = 2
+text = "→"
+
+[node name="TaskView" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_fc7eo")
+
+[node name="BackButton" type="Button" parent="TaskView"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource("4_dsh4q")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TaskView"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Input" type="HBoxContainer" parent="TaskView/VBoxContainer"]
+layout_mode = 2
+
+[node name="TaskText" type="Label" parent="TaskView/VBoxContainer/Input"]
+layout_mode = 2
+text = "TASK"
+
+[node name="TaskAnswer" type="LineEdit" parent="TaskView/VBoxContainer/Input"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+keep_editing_on_text_submit = true
+emoji_menu_enabled = false
+virtual_keyboard_type = 3
+clear_button_enabled = true
+
+[node name="CheckButton" type="Button" parent="TaskView/VBoxContainer/Input"]
+layout_mode = 2
+text = "CHECK"
+
+[node name="Message" type="ColorRect" parent="TaskView/VBoxContainer"]
+clip_children = 1
+custom_minimum_size = Vector2(0, 23)
+layout_mode = 2
+
+[node name="Content" type="HBoxContainer" parent="TaskView/VBoxContainer/Message"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Icon" type="TextureRect" parent="TaskView/VBoxContainer/Message/Content"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TaskView/VBoxContainer/Message/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MESSAGE"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TaskView/VBoxContainer/Message"]
+libraries = {
+&"": SubResource("AnimationLibrary_dsh4q")
+}
+
+[connection signal="item_activated" from="TaskSelection/TaskChooser/TasksContainer/Tasks" to="." method="_on_task_selected"]
+[connection signal="pressed" from="TaskSelection/TaskChooser/TasksContainer/Button" to="." method="_on_task_selected"]
+[connection signal="pressed" from="TaskView/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="text_submitted" from="TaskView/VBoxContainer/Input/TaskAnswer" to="TaskView" method="check_answer" unbinds=1]
+[connection signal="pressed" from="TaskView/VBoxContainer/Input/CheckButton" to="TaskView" method="check_answer"]

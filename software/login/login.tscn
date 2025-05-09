@@ -1,0 +1,114 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqtsqfmaeewl6"]
+
+[ext_resource type="Material" uid="uid://dv6d3acl2e4jv" path="res://assets/background.tres" id="1_dr4ko"]
+[ext_resource type="Script" uid="uid://b1k7ac1rl4euu" path="res://software/login/login.gd" id="2_d8qg1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wstf6"]
+font_size = 20
+
+[node name="Login" type="ColorRect"]
+z_index = 1
+material = ExtResource("1_dr4ko")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="GUI" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_d8qg1")
+
+[node name="AccountChooser" type="HBoxContainer" parent="GUI"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="GUI/AccountChooser"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "WHO_ARE_YOU"
+label_settings = SubResource("LabelSettings_wstf6")
+
+[node name="VSeparator" type="VSeparator" parent="GUI/AccountChooser"]
+layout_mode = 2
+
+[node name="AccountsContainer" type="VBoxContainer" parent="GUI/AccountChooser"]
+layout_mode = 2
+
+[node name="AboutButton" type="Button" parent="GUI"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "ABOUT"
+
+[node name="NewAccountDialog" type="ConfirmationDialog" parent="GUI"]
+title = "NEW_ACCOUNT"
+position = Vector2i(0, 36)
+unresizable = true
+cancel_button_text = "CANCEL"
+
+[node name="GridContainer" type="GridContainer" parent="GUI/NewAccountDialog"]
+offset_right = 200.0
+offset_bottom = 39.0
+columns = 2
+
+[node name="NameLabel" type="Label" parent="GUI/NewAccountDialog/GridContainer"]
+layout_mode = 2
+text = "NAME"
+
+[node name="NameTextEdit" type="LineEdit" parent="GUI/NewAccountDialog/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ENTER_NAME"
+
+[node name="AboutDialog" type="AcceptDialog" parent="GUI"]
+title = "ABOUT"
+
+[node name="TabContainer" type="TabContainer" parent="GUI/AboutDialog"]
+offset_right = 40.0
+offset_bottom = 40.0
+current_tab = 0
+use_hidden_tabs_for_min_size = true
+
+[node name="ABOUT" type="RichTextLabel" parent="GUI/AboutDialog/TabContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "ABOUT_TEXT"
+metadata/_tab_index = 0
+
+[node name="Copyright" type="RichTextLabel" parent="GUI/AboutDialog/TabContainer"]
+visible = false
+layout_mode = 2
+bbcode_enabled = true
+text = "Modular logic task software for education.
+Copyright (C) 2025-present Janosch Lion
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <[url]https://www.gnu.org/licenses/[/url]>."
+fit_content = true
+autowrap_mode = 0
+metadata/_tab_index = 1
+
+[connection signal="pressed" from="GUI/AboutButton" to="GUI/AboutDialog" method="popup_centered"]
+[connection signal="about_to_popup" from="GUI/NewAccountDialog" to="GUI" method="_on_new_account_dialog_about_to_popup"]
+[connection signal="confirmed" from="GUI/NewAccountDialog" to="GUI" method="_on_new_account_dialog_confirmed"]
+[connection signal="meta_clicked" from="GUI/AboutDialog/TabContainer/ABOUT" to="GUI" method="_on_rich_text_meta_clicked"]
+[connection signal="meta_clicked" from="GUI/AboutDialog/TabContainer/Copyright" to="GUI" method="_on_rich_text_meta_clicked"]
